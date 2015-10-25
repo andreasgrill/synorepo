@@ -2,6 +2,13 @@
 
 require "syno-repo.php";
 
+if(!empty($_REQUEST["payload"])){
+	$payload = json_decode(stripslashes($_REQUEST["payload"]), true);
+	if(!empty($payload["ref"])){
+		$_REQUEST['branch'] = preg_replace('/^.*?([^\/]+)$/', '$1', $payload["ref"]);
+	}
+}
+
 
 if(!empty($_REQUEST['branch'])){
 	$branch = $_REQUEST['branch'];
